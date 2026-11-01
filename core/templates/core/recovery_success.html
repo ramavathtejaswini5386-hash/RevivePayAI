@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Recovery Successful | RevivePay AI</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #0b1020;
+            color: white;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            border-bottom: 1px solid #222a45;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #6c8cff;
+        }
+
+        nav a {
+            color: #b8c0d9;
+            text-decoration: none;
+            margin-left: 25px;
+        }
+
+        .container {
+            min-height: 80vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .success-box {
+            width: 100%;
+            max-width: 600px;
+            background: #121a30;
+            border: 1px solid #222a45;
+            border-radius: 18px;
+            padding: 45px;
+            text-align: center;
+        }
+
+        .success-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .message {
+            color: #b8c0d9;
+            font-size: 17px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .amount-box {
+            background: #151d35;
+            border: 1px solid #222a45;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .amount-box p {
+            color: #9ca7c7;
+            margin-bottom: 8px;
+        }
+
+        .amount-box h2 {
+            color: #57d68d;
+            font-size: 30px;
+        }
+
+        .success-status {
+            display: inline-block;
+            background: #57d68d;
+            color: #08140d;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .dashboard-btn,
+        .transactions-btn {
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .dashboard-btn {
+            background: #6c8cff;
+            color: white;
+        }
+
+        .transactions-btn {
+            border: 1px solid #6c8cff;
+            color: #b8c0d9;
+        }
+
+        @media (max-width: 600px) {
+            .success-box {
+                padding: 30px 20px;
+            }
+
+            nav {
+                padding: 15px 5%;
+            }
+
+            nav a {
+                margin-left: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">
+            Revive<span>Pay AI</span>
+        </div>
+
+        <div>
+            <a href="/">Home</a>
+            <a href="/dashboard/">Dashboard</a>
+            <a href="/transactions/">Transactions</a>
+            <a href="/ai-insights/">AI Insights</a>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <div class="success-box">
+
+            <div class="success-icon">
+                ✅
+            </div>
+
+            <h1>Recovery Successful!</h1>
+
+            <p class="message">
+                Transaction
+                <strong>{{ transaction.transaction_id }}</strong>
+                has been successfully recovered using the AI recovery strategy.
+            </p>
+
+            <div class="success-status">
+                RECOVERED
+            </div>
+
+            <div class="amount-box">
+                <p>Recovered Amount</p>
+
+                <h2>
+                    ₹{{ transaction.amount }}
+                </h2>
+            </div>
+
+            <div class="actions">
+
+                <a href="/dashboard/" class="dashboard-btn">
+                    View Dashboard →
+                </a>
+
+                <a href="/transactions/" class="transactions-btn">
+                    View Transactions
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Transactions | RevivePay AI</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #0b1020;
+            color: white;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            border-bottom: 1px solid #222a45;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #6c8cff;
+        }
+
+        nav a {
+            color: #b8c0d9;
+            text-decoration: none;
+            margin-left: 25px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        nav a.active {
+            color: #6c8cff;
+            font-weight: bold;
+        }
+
+        /* ================= MAIN ================= */
+
+        .container {
+            padding: 40px 8%;
+        }
+
+        .title {
+            margin-bottom: 30px;
+        }
+
+        .title h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .title p {
+            color: #aab3cf;
+        }
+
+        /* ================= FILTER BOX ================= */
+
+        .filter-box {
+            background: #121a30;
+            border: 1px solid #222a45;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+
+            display: flex;
+            gap: 20px;
+            align-items: end;
+            flex-wrap: wrap;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .filter-group label {
+            color: #aab3cf;
+            font-size: 14px;
+        }
+
+        input,
+        select {
+            background: #151d35;
+            color: white;
+            border: 1px solid #222a45;
+            border-radius: 8px;
+            padding: 12px 15px;
+            min-width: 200px;
+            outline: none;
+        }
+
+        input::placeholder {
+            color: #7d86a3;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #6c8cff;
+        }
+
+        /* ================= BUTTONS ================= */
+
+        .filter-btn {
+            background: #6c8cff;
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .filter-btn:hover {
+            opacity: 0.9;
+        }
+
+        .clear-btn {
+            background: #252f50;
+            color: white;
+            text-decoration: none;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .clear-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* ================= TABLE ================= */
+
+        .table-container {
+            background: #121a30;
+            border: 1px solid #222a45;
+            border-radius: 15px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1100px;
+        }
+
+        th {
+            background: #151d35;
+            color: #aab3cf;
+            padding: 16px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        td {
+            padding: 16px;
+            border-top: 1px solid #222a45;
+            color: #d8def0;
+        }
+
+        tr:hover {
+            background: #151d35;
+        }
+
+        /* ================= STATUS ================= */
+
+        .status {
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .success {
+            background: #193d2d;
+            color: #57d68d;
+        }
+
+        .failed {
+            background: #45222b;
+            color: #ff6b6b;
+        }
+
+        .recovered {
+            background: #1d2d55;
+            color: #6c8cff;
+        }
+
+        /* ================= PRIORITY ================= */
+
+        .priority {
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .priority.high {
+            background: rgba(255, 107, 107, 0.15);
+            color: #ff6b6b;
+        }
+
+        .priority.medium {
+            background: rgba(245, 197, 66, 0.15);
+            color: #f5c542;
+        }
+
+        .priority.low {
+            background: rgba(87, 214, 141, 0.15);
+            color: #57d68d;
+        }
+
+        .priority.none {
+            background: rgba(156, 167, 199, 0.15);
+            color: #9ca7c7;
+        }
+
+        /* ================= ACTION BUTTON ================= */
+
+        .action-btn {
+            display: inline-block;
+            padding: 9px 14px;
+            background: #6c8cff;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .action-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* ================= TRANSACTION LINK ================= */
+
+        .transaction-link {
+            color: #6c8cff;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .transaction-link:hover {
+            text-decoration: underline;
+        }
+
+        /* ================= NO DATA ================= */
+
+        .no-data {
+            text-align: center;
+            padding: 40px;
+            color: #aab3cf;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 700px) {
+
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .container {
+                padding: 30px 5%;
+            }
+
+            .filter-box {
+                align-items: stretch;
+            }
+
+            .filter-group {
+                width: 100%;
+            }
+
+            input,
+            select {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav>
+
+        <div class="logo">
+            Revive<span>Pay AI</span>
+        </div>
+
+        <div>
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/dashboard/">
+                Dashboard
+            </a>
+
+            <a href="/transactions/" class="active">
+                Transactions
+            </a>
+
+            <a href="/ai-insights/">
+                AI Insights
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <div class="container">
+
+
+        <!-- ================= TITLE ================= -->
+
+        <div class="title">
+
+            <h1>
+                Payment Transactions
+            </h1>
+
+            <p>
+                Monitor transaction status and AI recovery potential.
+            </p>
+
+        </div>
+
+
+        <!-- ================= SEARCH AND FILTERS ================= -->
+
+        <form method="GET" class="filter-box">
+
+
+            <!-- SEARCH -->
+
+            <div class="filter-group">
+
+                <label>
+                    Search Transaction
+                </label>
+
+                <input
+                    type="text"
+                    name="search"
+                    placeholder="Enter Transaction ID..."
+                    value="{{ search_query|default:'' }}"
+                >
+
+            </div>
+
+
+            <!-- STATUS FILTER -->
+
+            <div class="filter-group">
+
+                <label>
+                    Transaction Status
+                </label>
+
+                <select name="status">
+
+                    <option value="">
+                        All Status
+                    </option>
+
+                    <option value="SUCCESS"
+                        {% if selected_status == "SUCCESS" %}selected{% endif %}>
+
+                        Success
+
+                    </option>
+
+                    <option value="FAILED"
+                        {% if selected_status == "FAILED" %}selected{% endif %}>
+
+                        Failed
+
+                    </option>
+
+                    <option value="RECOVERED"
+                        {% if selected_status == "RECOVERED" %}selected{% endif %}>
+
+                        Recovered
+
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- PRIORITY FILTER -->
+
+            <div class="filter-group">
+
+                <label>
+                    Recovery Priority
+                </label>
+
+                <select name="priority">
+
+                    <option value="">
+                        All Priorities
+                    </option>
+
+                    <option value="HIGH"
+                        {% if selected_priority == "HIGH" %}selected{% endif %}>
+
+                        High
+
+                    </option>
+
+                    <option value="MEDIUM"
+                        {% if selected_priority == "MEDIUM" %}selected{% endif %}>
+
+                        Medium
+
+                    </option>
+
+                    <option value="LOW"
+                        {% if selected_priority == "LOW" %}selected{% endif %}>
+
+                        Low
+
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- SEARCH BUTTON -->
+
+            <button
+                type="submit"
+                class="filter-btn"
+            >
+
+                🔍 Search
+
+            </button>
+
+
+            <!-- CLEAR BUTTON -->
+
+            <a
+                href="/transactions/"
+                class="clear-btn"
+            >
+
+                Clear
+
+            </a>
+
+
+        </form>
+
+
+        <!-- ================= TRANSACTIONS TABLE ================= -->
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Transaction ID</th>
+                        <th>Amount</th>
+                        <th>Payment Method</th>
+                        <th>Status</th>
+                        <th>Failure Reason</th>
+                        <th>Recovery Score</th>
+                        <th>AI Recommendation</th>
+                        <th>AI Priority</th>
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                    {% for transaction in transactions %}
+
+                    <tr>
+
+
+                        <!-- TRANSACTION ID -->
+
+                        <td>
+
+                            <a
+                                href="{% url 'transaction_detail' transaction.transaction_id %}"
+                                class="transaction-link"
+                            >
+
+                                {{ transaction.transaction_id }}
+
+                            </a>
+
+                        </td>
+
+
+                        <!-- AMOUNT -->
+
+                        <td>
+
+                            ₹{{ transaction.amount }}
+
+                        </td>
+
+
+                        <!-- PAYMENT METHOD -->
+
+                        <td>
+
+                            {{ transaction.payment_method }}
+
+                        </td>
+
+
+                        <!-- STATUS -->
+
+                        <td>
+
+                            {% if transaction.status == "SUCCESS" %}
+
+                                <span class="status success">
+                                    SUCCESS
+                                </span>
+
+                            {% elif transaction.status == "FAILED" %}
+
+                                <span class="status failed">
+                                    FAILED
+                                </span>
+
+                            {% elif transaction.status == "RECOVERED" %}
+
+                                <span class="status recovered">
+                                    RECOVERED
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <!-- FAILURE REASON -->
+
+                        <td>
+
+                            {% if transaction.failure_reason %}
+
+                                {{ transaction.failure_reason }}
+
+                            {% else %}
+
+                                -
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <!-- RECOVERY SCORE -->
+
+                        <td>
+
+                            {{ transaction.recovery_score }}%
+
+                        </td>
+
+
+                        <!-- AI RECOMMENDATION -->
+
+                        <td>
+
+                            {{ transaction.recommendation }}
+
+                        </td>
+
+
+                        <!-- AI PRIORITY -->
+
+                        <td>
+
+                            {% if transaction.priority == "HIGH" %}
+
+                                <span class="priority high">
+                                    HIGH
+                                </span>
+
+                            {% elif transaction.priority == "MEDIUM" %}
+
+                                <span class="priority medium">
+                                    MEDIUM
+                                </span>
+
+                            {% elif transaction.priority == "LOW" %}
+
+                                <span class="priority low">
+                                    LOW
+                                </span>
+
+                            {% else %}
+
+                                <span class="priority none">
+                                    NONE
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <!-- ACTION -->
+
+                        <td>
+
+                            {% if transaction.status == "FAILED" %}
+
+                                <a
+                                    href="/recovery-plan/{{ transaction.transaction_id }}/"
+                                    class="action-btn"
+                                >
+
+                                    Recovery Plan →
+
+                                </a>
+
+                            {% else %}
+
+                                -
+
+                            {% endif %}
+
+                        </td>
+
+
+                    </tr>
+
+
+                    {% empty %}
+
+                    <tr>
+
+                        <td colspan="9" class="no-data">
+
+                            No transactions found matching your search or filters.
+
+                        </td>
+
+                    </tr>
+
+
+                    {% endfor %}
+
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+    </div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Insights | RevivePay AI</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #0b1020;
+            color: white;
+        }
+
+        /* NAVBAR */
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            border-bottom: 1px solid #222a45;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #6c8cff;
+        }
+
+        nav a {
+            color: #b8c0d9;
+            text-decoration: none;
+            margin-left: 25px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        nav a.active {
+            color: #6c8cff;
+            font-weight: bold;
+        }
+
+        /* CONTAINER */
+
+        .container {
+            padding: 40px 8%;
+        }
+
+        .title {
+            margin-bottom: 30px;
+        }
+
+        .title h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .title p {
+            color: #aab3cf;
+        }
+
+        /* STATS */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: #121a30;
+            border: 1px solid #222a45;
+            border-radius: 15px;
+            padding: 22px;
+            transition: transform 0.2s ease,
+                        border-color 0.2s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: #6c8cff;
+        }
+
+        .stat-card p {
+            color: #9ca7c7;
+            margin-bottom: 10px;
+        }
+
+        .stat-card h2 {
+            font-size: 28px;
+        }
+
+        .danger {
+            color: #ff6b6b;
+        }
+
+        .success {
+            color: #57d68d;
+        }
+
+        .highlight {
+            color: #6c8cff;
+        }
+
+        .warning {
+            color: #f5c542;
+        }
+
+        /* INSIGHTS GRID */
+
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        /* SECTION */
+
+        .section {
+            background: #121a30;
+            border: 1px solid #222a45;
+            border-radius: 15px;
+            padding: 25px;
+        }
+
+        .section h2 {
+            margin-bottom: 20px;
+        }
+
+        /* INSIGHT ITEMS */
+
+        .insight-item {
+            background: #151d35;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .insight-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .insight-item h3 {
+            margin-bottom: 8px;
+            color: #6c8cff;
+        }
+
+        .insight-item p {
+            color: #aab3cf;
+            line-height: 1.6;
+        }
+
+        /* PAYMENT STATUS CHART */
+
+        .chart {
+            background: #151d35;
+            border-radius: 12px;
+            padding: 25px;
+            min-height: 300px;
+        }
+
+        .chart-row {
+            margin-bottom: 25px;
+        }
+
+        .chart-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .chart-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .chart-label span:first-child {
+            color: #d8def0;
+        }
+
+        .chart-label span:last-child {
+            color: #6c8cff;
+        }
+
+        .bar-background {
+            width: 100%;
+            height: 28px;
+            background: #0b1020;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .bar {
+            height: 100%;
+            min-width: 8px;
+            width: 0;
+            border-radius: 20px;
+            transition: width 0.6s ease;
+        }
+
+        .success-bar {
+            background: #57d68d;
+        }
+
+        .failed-bar {
+            background: #ff6b6b;
+        }
+
+        .recovered-bar {
+            background: #6c8cff;
+        }
+
+        /* LEGEND */
+
+        .chart-legend {
+            display: flex;
+            gap: 20px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+            color: #aab3cf;
+            font-size: 13px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .legend-success {
+            background: #57d68d;
+        }
+
+        .legend-failed {
+            background: #ff6b6b;
+        }
+
+        .legend-recovered {
+            background: #6c8cff;
+        }
+
+        /* AI SUMMARY */
+
+        .ai-summary {
+            margin-top: 20px;
+            background: #151d35;
+            border-left: 4px solid #6c8cff;
+            padding: 22px;
+            border-radius: 10px;
+        }
+
+        .ai-summary h3 {
+            margin-bottom: 12px;
+        }
+
+        .ai-summary p {
+            color: #b8c0d9;
+            line-height: 1.7;
+        }
+
+        /* BUTTON */
+
+        .action-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 20px;
+            background: #6c8cff;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .action-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 900px) {
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .insights-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .container {
+                padding: 30px 5%;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        .recommendations-section {
+            margin-top: 20px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav>
+
+        <div class="logo">
+            Revive<span>Pay AI</span>
+        </div>
+
+        <div>
+
+            <a href="/">Home</a>
+
+            <a href="/dashboard/">
+                Dashboard
+            </a>
+
+            <a href="/transactions/">
+                Transactions
+            </a>
+
+            <a href="/ai-insights/" class="active">
+                AI Insights
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- MAIN -->
+
+    <div class="container">
+
+        <!-- TITLE -->
+
+        <div class="title">
+
+            <h1>🤖 AI Recovery Insights</h1>
+
+            <p>
+                Intelligent analysis of payment failures and recovery opportunities.
+            </p>
+
+        </div>
+
+
+        <!-- STATS -->
+
+        <div class="stats">
+
+            <div class="stat-card">
+
+                <p>Total Failed Transactions</p>
+
+                <h2 class="danger">
+                    {{ total_failed }}
+                </h2>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <p>Total Recovered</p>
+
+                <h2 class="success">
+                    {{ total_recovered }}
+                </h2>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <p>Recovery Success Rate</p>
+
+                <h2 class="highlight">
+                    {{ recovery_success_rate }}%
+                </h2>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <p>Highest Failure Method</p>
+
+                <h2 class="warning">
+                    {{ highest_failure_method }}
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <!-- INSIGHTS GRID -->
+
+        <div class="insights-grid">
+
+
+            <!-- FAILURE ANALYSIS -->
+
+            <div class="section">
+
+                <h2>🔍 Failure Analysis</h2>
+
+
+                <div class="insight-item">
+
+                    <h3>Most Common Failure Reason</h3>
+
+                    <p>
+                        {{ most_common_failure }}
+                    </p>
+
+                </div>
+
+
+                <div class="insight-item">
+
+                    <h3>Payment Method With Highest Failures</h3>
+
+                    <p>
+                        {{ highest_failure_method }}
+                    </p>
+
+                </div>
+
+
+                <div class="insight-item">
+
+                    <h3>High Priority Transactions</h3>
+
+                    <p>
+                        {{ high_priority_count }}
+                        transaction(s) have high recovery priority.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- PAYMENT STATUS OVERVIEW -->
+
+            <div class="section">
+
+                <h2>📊 Payment Status Overview</h2>
+
+
+                <div class="chart">
+
+
+                    <!-- SUCCESS -->
+
+                    <div class="chart-row">
+
+                        <div class="chart-label">
+
+                            <span>Success</span>
+
+                            <span>
+                                {{ success_count }}
+                                ({{ success_percentage }}%)
+                            </span>
+
+                        </div>
+
+
+                        <div class="bar-background">
+
+                            <div
+                                class="bar success-bar"
+                                data-width="{{ success_percentage }}">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- FAILED -->
+
+                    <div class="chart-row">
+
+                        <div class="chart-label">
+
+                            <span>Failed</span>
+
+                            <span>
+                                {{ failed_count }}
+                                ({{ failed_percentage }}%)
+                            </span>
+
+                        </div>
+
+
+                        <div class="bar-background">
+
+                            <div
+                                class="bar failed-bar"
+                                data-width="{{ failed_percentage }}">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- RECOVERED -->
+
+                    <div class="chart-row">
+
+                        <div class="chart-label">
+
+                            <span>Recovered</span>
+
+                            <span>
+                                {{ recovered_count }}
+                                ({{ recovered_percentage }}%)
+                            </span>
+
+                        </div>
+
+
+                        <div class="bar-background">
+
+                            <div
+                                class="bar recovered-bar"
+                                data-width="{{ recovered_percentage }}">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- LEGEND -->
+
+                    <div class="chart-legend">
+
+                        <div class="legend-item">
+
+                            <div class="legend-color legend-success"></div>
+
+                            Success
+
+                        </div>
+
+
+                        <div class="legend-item">
+
+                            <div class="legend-color legend-failed"></div>
+
+                            Failed
+
+                        </div>
+
+
+                        <div class="legend-item">
+
+                            <div class="legend-color legend-recovered"></div>
+
+                            Recovered
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ACTIONABLE RECOMMENDATIONS -->
+        <div class="section recommendations-section">
+
+            <h2>🎯 Actionable Recommendations</h2>
+
+            {% for recommendation in recommendations %}
+
+                <div class="insight-item">
+
+                    <h3>💡 Recommendation</h3>
+                    <p>
+                        {{ recommendation }}
+                    </p>
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        <!-- AI SUMMARY -->
+
+        <div class="ai-summary">
+
+            <h3>🧠 AI Recovery Recommendation</h3>
+
+
+            {% if total_failed > 0 %}
+
+                <p>
+
+                    RevivePay AI has identified
+
+                    <strong>{{ total_failed }}</strong>
+
+                    transaction(s) that require recovery attention.
+
+                    The most common failure reason is
+
+                    <strong>{{ most_common_failure }}</strong>.
+
+                    Focus recovery efforts on
+
+                    <strong>{{ highest_failure_method }}</strong>
+
+                    transactions to improve the overall recovery success rate.
+
+                </p>
+
+            {% else %}
+
+                <p>
+
+                    🎉 No failed transactions currently require recovery.
+                    The payment system is operating normally.
+
+                </p>
+
+            {% endif %}
+
+
+            <a
+                href="/transactions/?status=FAILED"
+                class="action-btn">
+
+                View Failed Transactions →
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- BAR WIDTH SCRIPT -->
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                const bars =
+                    document.querySelectorAll(".bar");
+
+                bars.forEach(
+                    function (bar) {
+
+                        let width =
+                            parseFloat(
+                                bar.dataset.width
+                            );
+
+                        if (
+                            isNaN(width)
+                            || width <= 0
+                        ) {
+                            width = 8;
+                        }
+
+                        setTimeout(
+                            function () {
+
+                                bar.style.width =
+                                    width + "%";
+
+                            },
+                            100
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>

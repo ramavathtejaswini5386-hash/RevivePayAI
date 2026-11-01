@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Transaction {{ transaction.transaction_id }} | RevivePay AI
+    </title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #0b1020;
+            color: white;
+        }
+
+        /* NAVBAR */
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            border-bottom: 1px solid #222a45;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #6c8cff;
+        }
+
+        nav a {
+            color: #b8c0d9;
+            text-decoration: none;
+            margin-left: 25px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        /* MAIN */
+
+        .container {
+            padding: 40px 8%;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .back-btn {
+            display: inline-block;
+            color: #6c8cff;
+            text-decoration: none;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+
+        .back-btn:hover {
+            text-decoration: underline;
+        }
+
+        .title {
+            margin-bottom: 30px;
+        }
+
+        .title h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .title p {
+            color: #aab3cf;
+        }
+
+        /* CARD */
+
+        .details-card {
+            background: #121a30;
+            border: 1px solid #222a45;
+            border-radius: 15px;
+            padding: 30px;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .detail-item {
+            background: #151d35;
+            padding: 18px;
+            border-radius: 10px;
+        }
+
+        .detail-item label {
+            display: block;
+            color: #aab3cf;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .detail-item p {
+            font-size: 17px;
+            color: white;
+            word-break: break-word;
+        }
+
+        /* STATUS */
+
+        .status {
+            display: inline-block;
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .success {
+            background: #193d2d;
+            color: #57d68d;
+        }
+
+        .failed {
+            background: #45222b;
+            color: #ff6b6b;
+        }
+
+        .recovered {
+            background: #1d2d55;
+            color: #6c8cff;
+        }
+
+        /* PRIORITY */
+
+        .priority {
+            display: inline-block;
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .high {
+            background: #45222b;
+            color: #ff6b6b;
+        }
+
+        .medium {
+            background: #493b1d;
+            color: #f5c542;
+        }
+
+        .low {
+            background: #193d2d;
+            color: #57d68d;
+        }
+
+        .none {
+            background: #252a3d;
+            color: #aab3cf;
+        }
+
+        /* ACTION */
+
+        .action-section {
+            margin-top: 30px;
+        }
+
+        .action-btn {
+            display: inline-block;
+            background: #6c8cff;
+            color: white;
+            text-decoration: none;
+            padding: 13px 22px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .action-btn:hover {
+            opacity: 0.9;
+        }
+
+        @media (max-width: 700px) {
+
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .container {
+                padding: 30px 5%;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav>
+
+        <div class="logo">
+            Revive<span>Pay AI</span>
+        </div>
+
+        <div>
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/dashboard/">
+                Dashboard
+            </a>
+
+            <a href="/transactions/">
+                Transactions
+            </a>
+
+            <a href="/ai-insights/">
+                AI Insights
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- MAIN -->
+
+    <div class="container">
+
+        <a href="{% url 'transactions' %}" class="back-btn">
+            ← Back to Transactions
+        </a>
+
+
+        <div class="title">
+
+            <h1>
+                Transaction Details
+            </h1>
+
+            <p>
+                Detailed information and AI recovery analysis.
+            </p>
+
+        </div>
+
+
+        <!-- DETAILS CARD -->
+
+        <div class="details-card">
+
+            <div class="details-grid">
+
+
+                <!-- TRANSACTION ID -->
+
+                <div class="detail-item">
+
+                    <label>
+                        Transaction ID
+                    </label>
+
+                    <p>
+                        {{ transaction.transaction_id }}
+                    </p>
+
+                </div>
+
+
+                <!-- AMOUNT -->
+
+                <div class="detail-item">
+
+                    <label>
+                        Amount
+                    </label>
+
+                    <p>
+                        ₹{{ transaction.amount }}
+                    </p>
+
+                </div>
+
+
+                <!-- PAYMENT METHOD -->
+
+                <div class="detail-item">
+
+                    <label>
+                        Payment Method
+                    </label>
+
+                    <p>
+                        {{ transaction.payment_method }}
+                    </p>
+
+                </div>
+
+
+                <!-- STATUS -->
+
+                <div class="detail-item">
+
+                    <label>
+                        Status
+                    </label>
+
+                    <p>
+
+                        {% if transaction.status == "SUCCESS" %}
+
+                            <span class="status success">
+                                SUCCESS
+                            </span>
+
+                        {% elif transaction.status == "FAILED" %}
+
+                            <span class="status failed">
+                                FAILED
+                            </span>
+
+                        {% elif transaction.status == "RECOVERED" %}
+
+                            <span class="status recovered">
+                                RECOVERED
+                            </span>
+
+                        {% endif %}
+
+                    </p>
+
+                </div>
+
+
+                <!-- FAILURE REASON -->
+
+                <div class="detail-item">
+
+                    <label>
+                        Failure Reason
+                    </label>
+
+                    <p>
+
+                        {% if transaction.failure_reason %}
+
+                            {{ transaction.failure_reason }}
+
+                        {% else %}
+
+                            No failure reason
+
+                        {% endif %}
+
+                    </p>
+
+                </div>
+
+
+                <!-- RECOVERY SCORE -->
+
+                <div class="detail-item">
+
+                    <label>
+                        Recovery Score
+                    </label>
+
+                    <p>
+                        {{ transaction.recovery_score }}%
+                    </p>
+
+                </div>
+
+
+                <!-- AI RECOMMENDATION -->
+
+                <div class="detail-item">
+
+                    <label>
+                        AI Recommendation
+                    </label>
+
+                    <p>
+                        {{ transaction.recommendation }}
+                    </p>
+
+                </div>
+
+
+                <!-- AI PRIORITY -->
+
+                <div class="detail-item">
+
+                    <label>
+                        AI Priority
+                    </label>
+
+                    <p>
+
+                        {% if transaction.priority == "HIGH" %}
+
+                            <span class="priority high">
+                                HIGH
+                            </span>
+
+                        {% elif transaction.priority == "MEDIUM" %}
+
+                            <span class="priority medium">
+                                MEDIUM
+                            </span>
+
+                        {% elif transaction.priority == "LOW" %}
+
+                            <span class="priority low">
+                                LOW
+                            </span>
+
+                        {% else %}
+
+                            <span class="priority none">
+                                NONE
+                            </span>
+
+                        {% endif %}
+
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- RECOVERY ACTION -->
+
+            {% if transaction.status == "FAILED" %}
+
+            <div class="action-section">
+
+                <a
+                    href="{% url 'recovery_plan' transaction.transaction_id %}"
+                    class="action-btn"
+                >
+
+                    View AI Recovery Plan →
+
+                </a>
+
+            </div>
+
+            {% endif %}
+
+
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>

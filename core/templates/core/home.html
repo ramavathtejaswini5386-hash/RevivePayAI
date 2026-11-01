@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>RevivePay AI | Smart Payment Recovery</title>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        background: #0b1020;
+        color: white;
+    }
+
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 8%;
+        border-bottom: 1px solid #222a45;
+    }
+
+    .logo {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .logo span {
+        color: #6c8cff;
+    }
+
+    nav a {
+        color: #b8c0d9;
+        text-decoration: none;
+        margin-left: 25px;
+    }
+
+    nav a:hover {
+        color: #6c8cff;
+    }
+
+    .hero {
+        min-height: 75vh;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 60px 8%;
+        gap: 40px;
+    }
+
+    .hero-content {
+        max-width: 650px;
+    }
+
+    .badge {
+        display: inline-block;
+        padding: 8px 14px;
+        background: #151d35;
+        border: 1px solid #222a45;
+        border-radius: 20px;
+        color: #8fa7ff;
+        margin-bottom: 20px;
+    }
+
+    .hero h1 {
+        font-size: 52px;
+        line-height: 1.15;
+        margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+        color: #6c8cff;
+    }
+
+    .hero p {
+        color: #aab3cf;
+        font-size: 18px;
+        line-height: 1.7;
+        margin-bottom: 30px;
+    }
+
+    .hero-buttons {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+        display: inline-block;
+        padding: 14px 22px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .primary-btn {
+        background: #6c8cff;
+        color: white;
+    }
+
+    .secondary-btn {
+        border: 1px solid #6c8cff;
+        color: #b8c0d9;
+    }
+
+    .hero-card {
+        width: 380px;
+        background: #121a30;
+        border: 1px solid #222a45;
+        border-radius: 20px;
+        padding: 30px;
+    }
+
+    .hero-card h2 {
+        margin-bottom: 25px;
+    }
+
+    .mini-card {
+        background: #151d35;
+        padding: 18px;
+        border-radius: 12px;
+        margin-bottom: 15px;
+    }
+
+    .mini-card p {
+        color: #9ca7c7;
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+
+    .mini-card h3 {
+        font-size: 22px;
+    }
+
+    .positive {
+        color: #57d68d;
+    }
+
+    .features {
+        padding: 30px 8% 70px;
+    }
+
+    .features-title {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .features-title h2 {
+        font-size: 32px;
+        margin-bottom: 10px;
+    }
+
+    .features-title p {
+        color: #aab3cf;
+    }
+
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+
+    .feature-card {
+        background: #121a30;
+        border: 1px solid #222a45;
+        border-radius: 15px;
+        padding: 25px;
+    }
+
+    .feature-icon {
+        font-size: 32px;
+        margin-bottom: 15px;
+    }
+
+    .feature-card h3 {
+        margin-bottom: 12px;
+    }
+
+    .feature-card p {
+        color: #aab3cf;
+        line-height: 1.6;
+    }
+
+    @media (max-width: 900px) {
+        .hero {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .hero-card {
+            width: 100%;
+        }
+
+        .features-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .hero h1 {
+            font-size: 40px;
+        }
+    }
+
+    @media (max-width: 600px) {
+        nav {
+            padding: 15px 5%;
+        }
+
+        nav a {
+            margin-left: 10px;
+            font-size: 14px;
+        }
+
+        .hero {
+            padding: 40px 5%;
+        }
+
+        .hero h1 {
+            font-size: 34px;
+        }
+    }
+</style>
+```
+
+</head>
+
+<body>
+
+```
+<nav>
+    <div class="logo">
+        Revive<span>Pay AI</span>
+    </div>
+
+    <div>
+        <a href="/">Home</a>
+        <a href="/dashboard/">Dashboard</a>
+        <a href="/transactions/">Transactions</a>
+        <a href="/ai-insights/">AI Insights</a>
+    </div>
+</nav>
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="badge">
+            🤖 AI-Powered Payment Recovery
+        </div>
+
+        <h1>
+            Recover Failed Payments
+            <span>Intelligently.</span>
+        </h1>
+
+        <p>
+            RevivePay AI analyzes failed payment transactions,
+            identifies recovery opportunities, assigns intelligent
+            priorities, and recommends the best recovery strategy.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="/dashboard/" class="primary-btn">
+                Open Dashboard →
+            </a>
+
+            <a href="/transactions/" class="secondary-btn">
+                View Transactions
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="hero-card">
+
+        <h2>📊 Recovery Overview</h2>
+
+        <div class="mini-card">
+            <p>AI Recovery Engine</p>
+            <h3 class="positive">ACTIVE</h3>
+        </div>
+
+        <div class="mini-card">
+            <p>Transaction Monitoring</p>
+            <h3>Real-Time</h3>
+        </div>
+
+        <div class="mini-card">
+            <p>Recovery Strategy</p>
+            <h3 class="positive">AI Optimized</h3>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="features">
+
+    <div class="features-title">
+        <h2>Smart Payment Recovery</h2>
+
+        <p>
+            Intelligent insights to reduce payment failures and recover revenue.
+        </p>
+    </div>
+
+    <div class="features-grid">
+
+        <div class="feature-card">
+            <div class="feature-icon">🔍</div>
+
+            <h3>Failure Detection</h3>
+
+            <p>
+                Automatically detects failed transactions and analyzes
+                the possible reason behind each payment failure.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">🧠</div>
+
+            <h3>AI Recommendations</h3>
+
+            <p>
+                Generates smart recovery recommendations based on
+                failure reason, transaction value, and recovery score.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">💰</div>
+
+            <h3>Revenue Recovery</h3>
+
+            <p>
+                Helps identify high-priority transactions and maximize
+                recoverable revenue using intelligent strategies.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+</body>
+</html>

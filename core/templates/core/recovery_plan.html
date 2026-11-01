@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>AI Recovery Plan | RevivePay AI</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #0b1020;
+            color: white;
+        }
+
+        /* NAVBAR */
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            border-bottom: 1px solid #222a45;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #6c8cff;
+        }
+
+        nav a {
+            color: #b8c0d9;
+            text-decoration: none;
+            margin-left: 25px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        /* MAIN */
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 40px 8%;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 25px;
+            color: #6c8cff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-btn:hover {
+            text-decoration: underline;
+        }
+
+        .title {
+            margin-bottom: 30px;
+        }
+
+        .title h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .title p {
+            color: #aab3cf;
+        }
+
+        /* CARD */
+
+        .card {
+            background: #121a30;
+            border: 1px solid #222a45;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 25px;
+        }
+
+        .card h2 {
+            margin-bottom: 20px;
+            color: #6c8cff;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .info-box {
+            background: #151d35;
+            padding: 18px;
+            border-radius: 10px;
+        }
+
+        .label {
+            color: #aab3cf;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .value {
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        /* PRIORITY */
+
+        .priority {
+            display: inline-block;
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .high {
+            background: #45222b;
+            color: #ff6b6b;
+        }
+
+        .medium {
+            background: #493b1d;
+            color: #f5c542;
+        }
+
+        .low {
+            background: #193d2d;
+            color: #57d68d;
+        }
+
+        /* RECOVERY SCORE */
+
+        .score {
+            font-size: 32px;
+            font-weight: bold;
+            color: #6c8cff;
+        }
+
+        /* RECOMMENDATION */
+
+        .recommendation {
+            background: #151d35;
+            padding: 20px;
+            border-radius: 10px;
+            color: #d8def0;
+            line-height: 1.6;
+        }
+
+        /* RECOVERY STEPS */
+
+        .steps {
+            margin-top: 15px;
+        }
+
+        .step {
+            background: #151d35;
+            border-left: 4px solid #6c8cff;
+            padding: 16px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+        }
+
+        .step strong {
+            color: #6c8cff;
+        }
+
+        /* BUTTON */
+
+        .execute-btn {
+            display: inline-block;
+            background: #6c8cff;
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .execute-btn:hover {
+            opacity: 0.9;
+        }
+
+        .completed {
+            background: #193d2d;
+            color: #57d68d;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 700px) {
+
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .container {
+                padding: 30px 5%;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav>
+
+        <div class="logo">
+            Revive<span>Pay AI</span>
+        </div>
+
+        <div>
+
+            <a href="/">Home</a>
+
+            <a href="/dashboard/">
+                Dashboard
+            </a>
+
+            <a href="/transactions/">
+                Transactions
+            </a>
+
+            <a href="/ai-insights/">
+                AI Insights
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <div class="container">
+
+        <a href="/transactions/" class="back-btn">
+            ← Back to Transactions
+        </a>
+
+
+        <!-- TITLE -->
+
+        <div class="title">
+
+            <h1>
+                AI Recovery Plan
+            </h1>
+
+            <p>
+                AI-generated recovery strategy for failed payment.
+            </p>
+
+        </div>
+
+
+        <!-- TRANSACTION DETAILS -->
+
+        <div class="card">
+
+            <h2>
+                Transaction Information
+            </h2>
+
+            <div class="info-grid">
+
+                <div class="info-box">
+
+                    <div class="label">
+                        Transaction ID
+                    </div>
+
+                    <div class="value">
+                        {{ transaction.transaction_id }}
+                    </div>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <div class="label">
+                        Amount
+                    </div>
+
+                    <div class="value">
+                        ₹{{ transaction.amount }}
+                    </div>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <div class="label">
+                        Payment Method
+                    </div>
+
+                    <div class="value">
+                        {{ transaction.payment_method }}
+                    </div>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <div class="label">
+                        Failure Reason
+                    </div>
+
+                    <div class="value">
+                        {{ transaction.failure_reason }}
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- AI ANALYSIS -->
+
+        <div class="card">
+
+            <h2>
+                AI Recovery Analysis
+            </h2>
+
+            <div class="info-grid">
+
+                <div class="info-box">
+
+                    <div class="label">
+                        Recovery Score
+                    </div>
+
+                    <div class="score">
+                        {{ transaction.recovery_score }}%
+                    </div>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <div class="label">
+                        AI Priority
+                    </div>
+
+                    <div class="value">
+
+                        {% if priority == "HIGH" %}
+
+                            <span class="priority high">
+                                HIGH
+                            </span>
+
+                        {% elif priority == "MEDIUM" %}
+
+                            <span class="priority medium">
+                                MEDIUM
+                            </span>
+
+                        {% else %}
+
+                            <span class="priority low">
+                                LOW
+                            </span>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- AI RECOMMENDATION -->
+
+        <div class="card">
+
+            <h2>
+                AI Recommendation
+            </h2>
+
+            <div class="recommendation">
+
+                {{ recommendation }}
+
+            </div>
+
+        </div>
+
+
+        <!-- RECOVERY STEPS -->
+
+        <div class="card">
+
+            <h2>
+                Suggested Recovery Steps
+            </h2>
+
+            <div class="steps">
+
+                <div class="step">
+
+                    <strong>Step 1:</strong>
+
+                    Analyze the transaction failure reason.
+
+                </div>
+
+
+                <div class="step">
+
+                    <strong>Step 2:</strong>
+
+                    Verify payment method and customer details.
+
+                </div>
+
+
+                <div class="step">
+
+                    <strong>Step 3:</strong>
+
+                    Apply the AI-recommended recovery strategy.
+
+                </div>
+
+
+                <div class="step">
+
+                    <strong>Step 4:</strong>
+
+                    Retry or initiate payment recovery.
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- EXECUTE RECOVERY -->
+
+        <div class="card">
+
+            {% if transaction.status == "FAILED" %}
+
+                <h2>
+                    Execute Recovery
+                </h2>
+
+                <p style="color: #aab3cf; margin-bottom: 20px;">
+
+                    Execute the AI recovery process for this transaction.
+
+                </p>
+
+
+                <!-- POST FORM -->
+
+                <form method="POST"
+                      action="{% url 'execute_recovery' transaction.transaction_id %}">
+
+                    {% csrf_token %}
+
+                    <button type="submit" class="execute-btn">
+
+                        Execute AI Recovery →
+
+                    </button>
+
+                </form>
+
+
+            {% else %}
+
+                <div class="completed">
+
+                    ✓ This transaction has already been recovered.
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+
+    </div>
+
+</body>
+
+</html>

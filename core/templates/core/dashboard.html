@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | RevivePay AI</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #0b1020;
+            color: white;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            border-bottom: 1px solid #222a45;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #6c8cff;
+        }
+
+        nav a {
+            color: #b8c0d9;
+            text-decoration: none;
+            margin-left: 25px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        nav a.active {
+            color: #6c8cff;
+            font-weight: bold;
+        }
+
+        /* ================= CONTAINER ================= */
+
+        .container {
+            padding: 40px 8%;
+        }
+
+        .title {
+            margin-bottom: 30px;
+        }
+
+        .title h1 {
+            font-size: 32px;
+        }
+
+        .title p {
+            color: #aab3cf;
+            margin-top: 8px;
+        }
+
+        /* ================= STATS ================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: #121a30;
+            border: 1px solid #222a45;
+            border-radius: 15px;
+            padding: 22px;
+            transition: transform 0.2s ease,
+                        border-color 0.2s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: #6c8cff;
+        }
+
+        .stat-card p {
+            color: #9ca7c7;
+            margin-bottom: 10px;
+        }
+
+        .stat-card h2 {
+            font-size: 28px;
+        }
+
+        .danger {
+            color: #ff6b6b;
+        }
+
+        .success {
+            color: #57d68d;
+        }
+
+        .highlight {
+            color: #6c8cff;
+        }
+
+        /* ================= DASHBOARD GRID ================= */
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            align-items: start;
+            margin-top: 20px;
+        }
+
+        /* ================= SECTIONS ================= */
+
+        .section {
+            background: #121a30;
+            border: 1px solid #222a45;
+            border-radius: 15px;
+            padding: 25px;
+            transition: transform 0.2s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-2px);
+        }
+
+        .section h2 {
+            margin-bottom: 20px;
+        }
+
+        /* ================= CHART ================= */
+
+        .chart-container {
+            position: relative;
+            height: 320px;
+            width: 100%;
+        }
+
+        /* ================= ALERT ================= */
+
+        .alert {
+            background: #1c243d;
+            border-left: 4px solid #ff6b6b;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .alert h3 {
+            margin-bottom: 10px;
+        }
+
+        .alert p {
+            color: #b8c0d9;
+            line-height: 1.6;
+        }
+
+        /* ================= ACTION ================= */
+
+        .action {
+            margin-top: 20px;
+            background: #151d35;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .action h3 {
+            margin-bottom: 10px;
+        }
+
+        .action p {
+            color: #aab3cf;
+            line-height: 1.5;
+        }
+
+        .action-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            background: #6c8cff;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .action-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        /* ================= ACTIVITY ================= */
+
+        .activity-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #151d35;
+            padding: 18px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .activity-item h3 {
+            margin-bottom: 7px;
+        }
+
+        .activity-item p {
+            color: #aab3cf;
+            font-size: 14px;
+        }
+
+        .activity-success,
+        .activity-active {
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .activity-success {
+            background: #193d2d;
+            color: #57d68d;
+        }
+
+        .activity-active {
+            background: #1d2d55;
+            color: #6c8cff;
+        }
+
+        /* ================= RECOVERY TABLE ================= */
+
+        .recovery-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .recovery-table th,
+        .recovery-table td {
+            padding: 14px;
+            text-align: left;
+            border-bottom: 1px solid #222a45;
+        }
+
+        .recovery-table th {
+            color: #8fa7ff;
+        }
+
+        .recovery-table td {
+            color: #d8def0;
+        }
+
+        .recovery-table tr:hover {
+            background: #151d35;
+        }
+
+        .view-btn {
+            display: inline-block;
+            padding: 7px 12px;
+            background: #6c8cff;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 13px;
+        }
+
+        /* ================= EMPTY MESSAGE ================= */
+
+        .empty-message {
+            color: #aab3cf;
+            padding: 15px 0;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 900px) {
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav a {
+                margin-left: 10px;
+                margin-right: 10px;
+            }
+
+            .container {
+                padding: 30px 5%;
+            }
+
+            .activity-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav>
+
+        <div class="logo">
+            Revive<span>Pay AI</span>
+        </div>
+
+        <div>
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/dashboard/" class="active">
+                Dashboard
+            </a>
+
+            <a href="/transactions/">
+                Transactions
+            </a>
+
+            <a href="/ai-insights/">
+                AI Insights
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <div class="container">
+
+
+        <!-- ================= TITLE ================= -->
+
+        <div class="title">
+
+            <h1>
+                Revenue Recovery Dashboard
+            </h1>
+
+            <p>
+                Real-time payment intelligence and AI-powered recovery insights.
+            </p>
+
+        </div>
+
+
+        <!-- ================= STAT CARDS ================= -->
+
+        <div class="stats">
+
+
+            <div class="stat-card">
+
+                <p>
+                    Total Transactions
+                </p>
+
+                <h2>
+                    {{ total_transactions }}
+                </h2>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <p>
+                    Revenue at Risk
+                </p>
+
+                <h2 class="danger">
+                    ₹{{ revenue_at_risk }}
+                </h2>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <p>
+                    Recoverable Revenue
+                </p>
+
+                <h2 class="highlight">
+                    ₹{{ recoverable_revenue }}
+                </h2>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <p>
+                    Recovered Revenue
+                </p>
+
+                <h2 class="success">
+                    ₹{{ recovered_revenue }}
+                </h2>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- ================= FIRST ROW ================= -->
+
+        <div class="dashboard-grid">
+
+
+            <!-- ================= REVENUE CHART ================= -->
+
+            <div class="section">
+
+                <h2>
+                    📊 Revenue Analysis
+                </h2>
+
+                <div class="chart-container">
+
+                    <canvas
+                        id="revenueChart"
+                        data-risk="{{ revenue_at_risk }}"
+                        data-recoverable="{{ recoverable_revenue }}"
+                        data-recovered="{{ recovered_revenue }}">
+                    </canvas>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= AI ALERT ================= -->
+
+            <div class="section">
+
+                <h2>
+                    🚨 AI Investigation Alert
+                </h2>
+
+
+                <div class="alert">
+
+
+                    {% if affected_transactions > 0 %}
+
+                        <h3>
+                            {{ alert_payment_method }}
+                            Payment Failure Detected
+                        </h3>
+
+
+                        <p>
+
+                            RevivePay AI detected failed payment
+                            transactions that require recovery analysis.
+
+                        </p>
+
+
+                        <p>
+
+                            <br>
+
+                            <strong>
+                                Affected Transactions:
+                            </strong>
+
+                            {{ affected_transactions }}
+
+                            <br>
+
+                            <strong>
+                                Revenue at Risk:
+                            </strong>
+
+                            ₹{{ revenue_at_risk }}
+
+                            <br>
+
+                            <strong>
+                                Likely Cause:
+                            </strong>
+
+                            {{ alert_failure_reason }}
+
+                        </p>
+
+
+                    {% else %}
+
+
+                        <h3>
+                            🎉 No Payment Failures Detected
+                        </h3>
+
+
+                        <p>
+
+                            All transactions are currently
+                            successful or recovered.
+
+                        </p>
+
+
+                    {% endif %}
+
+
+                </div>
+
+
+                <!-- ================= AI STRATEGY ================= -->
+
+                <div class="action">
+
+
+                    <h3>
+                        🤖 AI Recommended Strategy
+                    </h3>
+
+
+                    <p>
+
+                        Review failed transactions and apply the
+                        recommended AI recovery strategy to maximize
+                        revenue recovery.
+
+                    </p>
+
+
+                    <a
+                        href="/transactions/?status=FAILED"
+                        class="action-btn"
+                    >
+                        View Failed Transactions →
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+        <!-- ================= SECOND ROW ================= -->
+
+        <div class="dashboard-grid">
+
+
+            <!-- ================= PAYMENT STATUS ================= -->
+
+            <div class="section">
+
+
+                <h2>
+                    📊 Payment Status Analysis
+                </h2>
+
+
+                <div class="chart-container">
+
+
+                    <canvas
+                        id="dashboardChart"
+                        data-success="{{ success_count }}"
+                        data-failed="{{ failed_count }}"
+                        data-recovered="{{ recovered_count }}">
+                    </canvas>
+
+
+                </div>
+
+
+            </div>
+
+
+            <!-- ================= RECENT RECOVERY ================= -->
+
+            <div class="section">
+
+
+                <h2>
+                    ⚡ Recent Recovery Activity
+                </h2>
+
+
+                {% for transaction in recent_recoveries %}
+
+
+                    <div class="activity-item">
+
+
+                        <div>
+
+                            <h3>
+                                {{ transaction.transaction_id }}
+                            </h3>
+
+                            <p>
+
+                                ₹{{ transaction.amount }}
+                                •
+                                {{ transaction.payment_method }}
+
+                            </p>
+
+                        </div>
+
+
+                        <span class="activity-success">
+
+                            RECOVERED
+
+                        </span>
+
+
+                    </div>
+
+
+                {% empty %}
+
+
+                    <p class="empty-message">
+
+                        No recovered transactions yet.
+
+                    </p>
+
+
+                {% endfor %}
+
+
+                <!-- AI ENGINE STATUS -->
+
+                <div class="activity-item">
+
+
+                    <div>
+
+                        <h3>
+                            🤖 AI Recovery Engine
+                        </h3>
+
+                        <p>
+                            Monitoring all payment transactions
+                            in real-time
+                        </p>
+
+                    </div>
+
+
+                    <span class="activity-active">
+                        ACTIVE
+                    </span>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+        <!-- ================= RECENT RECOVERIES TABLE ================= -->
+
+        <div class="section" style="margin-top:20px;">
+
+
+            <h2>
+                ✅ Recent Recovered Transactions
+            </h2>
+
+
+            {% if recent_recoveries %}
+
+
+                <div style="overflow-x:auto;">
+
+                    <table class="recovery-table">
+
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Transaction ID
+                                </th>
+
+                                <th>
+                                    Amount
+                                </th>
+
+                                <th>
+                                    Payment Method
+                                </th>
+
+                                <th>
+                                    Recovery Score
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                                <th>
+                                    Action
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+
+                            {% for transaction in recent_recoveries %}
+
+
+                                <tr>
+
+
+                                    <td>
+                                        {{ transaction.transaction_id }}
+                                    </td>
+
+
+                                    <td class="success">
+                                        ₹{{ transaction.amount }}
+                                    </td>
+
+
+                                    <td>
+                                        {{ transaction.payment_method }}
+                                    </td>
+
+
+                                    <td>
+                                        {{ transaction.recovery_score }}%
+                                    </td>
+
+
+                                    <td class="success">
+                                        RECOVERED
+                                    </td>
+
+
+                                    <td>
+
+                                        <a
+                                            href="/transactions/"
+                                            class="view-btn"
+                                        >
+                                            View
+                                        </a>
+
+                                    </td>
+
+
+                                </tr>
+
+
+                            {% endfor %}
+
+
+                        </tbody>
+
+
+                    </table>
+
+                </div>
+
+
+            {% else %}
+
+
+                <p class="empty-message">
+
+                    No recovered transactions yet.
+
+                </p>
+
+
+            {% endif %}
+
+
+        </div>
+
+
+    </div>
+
+
+    <!-- ================= CHART JS ================= -->
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+    <!-- ================= REVENUE CHART ================= -->
+
+    <script>
+
+        const revenueCanvas =
+            document.getElementById("revenueChart");
+
+
+        const revenueAtRisk =
+            Number(
+                revenueCanvas.dataset.risk
+            );
+
+
+        const recoverableRevenue =
+            Number(
+                revenueCanvas.dataset.recoverable
+            );
+
+
+        const recoveredRevenue =
+            Number(
+                revenueCanvas.dataset.recovered
+            );
+
+
+        new Chart(
+            revenueCanvas,
+            {
+
+                type: "bar",
+
+                data: {
+
+                    labels: [
+
+                        "Revenue at Risk",
+
+                        "Recoverable Revenue",
+
+                        "Recovered Revenue"
+
+                    ],
+
+                    datasets: [{
+
+                        label:
+                            "Revenue Amount (₹)",
+
+                        data: [
+
+                            revenueAtRisk,
+
+                            recoverableRevenue,
+
+                            recoveredRevenue
+
+                        ],
+
+                        borderWidth: 1
+
+                    }]
+
+                },
+
+
+                options: {
+
+                    responsive: true,
+
+                    maintainAspectRatio: false,
+
+                    scales: {
+
+                        y: {
+
+                            beginAtZero: true
+
+                        }
+
+                    }
+
+                }
+
+            }
+        );
+
+    </script>
+
+
+    <!-- ================= PAYMENT STATUS CHART ================= -->
+
+    <script>
+
+        const dashboardCanvas =
+            document.getElementById("dashboardChart");
+
+
+        const successCount =
+            Number(
+                dashboardCanvas.dataset.success
+            );
+
+
+        const failedCount =
+            Number(
+                dashboardCanvas.dataset.failed
+            );
+
+
+        const recoveredCount =
+            Number(
+                dashboardCanvas.dataset.recovered
+            );
+
+
+        new Chart(
+            dashboardCanvas,
+            {
+
+                type: "bar",
+
+                data: {
+
+                    labels: [
+
+                        "Success",
+
+                        "Failed",
+
+                        "Recovered"
+
+                    ],
+
+                    datasets: [{
+
+                        label:
+                            "Number of Transactions",
+
+                        data: [
+
+                            successCount,
+
+                            failedCount,
+
+                            recoveredCount
+
+                        ],
+
+                        borderWidth: 1
+
+                    }]
+
+                },
+
+
+                options: {
+
+                    responsive: true,
+
+                    maintainAspectRatio: false,
+
+                    scales: {
+
+                        y: {
+
+                            beginAtZero: true,
+
+                            ticks: {
+
+                                stepSize: 1
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>
